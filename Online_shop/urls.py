@@ -26,8 +26,8 @@ urlpatterns = [
     path('products/',products_views),
     path('products/<int:id>/',product_detail_view),
     path('products/create/',create_product),
-    path('user/login',auth_view),
-    path('user/logout',logout_view),
+    path('users/login',auth_view),
+    path('users/logout',logout_view),
     path('users/register/', register_view),
 ]
 
