@@ -15,20 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from products.views import main, products_views, product_detail_view,create_product
+
+from products.models import Product
+from products.views import ProductDetailView,CreateView,MainView, ProductSView
 from Online_shop.settings import MEDIA_ROOT, MEDIA_URL
 from django.conf.urls.static import static
-from users.views import auth_view, logout_view, register_view
+from users.views import AuthView, LogOutView, RegisterView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', main),
-    path('products/',products_views),
-    path('products/<int:id>/',product_detail_view),
-    path('products/create/',create_product),
-    path('users/login',auth_view),
-    path('users/logout',logout_view),
-    path('users/register/', register_view),
-]
+    path('', MainView.as_view(model = Product,template_name = 'layouts/index.html')),
+    path('products/',ProductSView.as_view(template_name='products/posts.html',model=Product)),
+    path('products/<int:id>/',ProductDetailView.as_view(model=Product,template_name='products/detail.html')),
+    path('products/create/',CreateView.as_view(model=Product, template_name='products/posts.html')),
 
+    path('users/login',AuthView.as_view(template_name = 'users/auth.html')),
+    path('users/logout',LogOutView.as_view()),
+    path('users/register/',RegisterView.as_view(template_name = 'users/register.html')),
+]
 urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)

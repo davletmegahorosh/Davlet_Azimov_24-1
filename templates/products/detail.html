@@ -21,16 +21,16 @@
         }
     </style>
     <div class="products">
-        <img src="/media/{{product.image}}/" alt="">
-        <h1>{{ product.title }}</h1>
-        <h4>{{ product.description }}</h4>
-        <h4>Price: {{ product.price }}</h4>
+        <img src="/media/{{post.image}}/" width="600px" alt="">
+        <h1>{{ post.title }}</h1>
+        <h4>{{ post.description }}</h4>
+        <h4>{{ post.price }} $</h4>
         <div class="dates">
-            <h5>{{ product.created_date }}</h5>
-            <h5>{{ product.modified_date }}</h5>
+            <h5>{{ post.created_date }}</h5>
+            <h5>{{ post.modified_date }}</h5>
         </div>
         <div class="create_comment">
-            <form action="/products/{{ product.id }}/" method="post">
+            <form action="/products/{{ post.id }}/" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" value="Add comment">
